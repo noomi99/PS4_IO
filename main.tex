@@ -1,0 +1,107 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, geometry, booktabs, multirow}
+\geometry{a4paper, margin=1in}
+\usepackage{float}
+\usepackage{pgfplots}
+\usepackage{placeins}
+\pgfplotsset{compat=1.18}
+\usepackage{hyperref}
+\usepackage{adjustbox}
+\usepackage{float}
+\usepackage{graphicx}
+\renewcommand{\floatpagefraction}{0.8} % Minimum fraction of a page for floats
+\renewcommand{\textfraction}{0.1}     % Minimum fraction of text on a page
+\renewcommand{\topfraction}{0.9}      % Maximum fraction of a page for floats at the top
+\renewcommand{\bottomfraction}{0.9}   % Maximum fraction of a page for floats at the bottom
+
+\title{Methods in Empirical IO and Competition Policy \\ Problem Set 4 }
+\author{Pia\\ Henry\\Noomi Falk - 12010910 }
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Exercise 2: Cobb-Douglas production function}
+Cobb- Douglas Production function in levels, where $Y_{jt}$ is the Output of firm $j$ at time $t$, $K_{jt}$ the capital input, $L_{jt}$ the labor and $A_{jt}$ the efficiency level of form $j$, which is unobserved.\\
+\[Y_{jt} = A_{jt} \cdot K_{jt}^{\beta_K} \cdot L_{jt}^{\beta_L}\]\\
+Take logs to linearize the production function:
+\[y_{jt} = \beta_0 + \beta_k \cdot k_{jt} + \beta_l \cdot l_{jt} + \epsilon_{jt}\]
+\[\text{with } y_{jt} = \ln Y_{jt},\quad k_{jt} = \ln K_{jt},\quad l_{jt} = \ln L_{jt},\quad \text{and } \beta_0 + \epsilon_{jt} = \ln A_{jt}\]\\
+The error term $e_{jt}$ can be split into 2 parts: $\omega_{jt}$ productivity of firm $j$ (observed by the firm)and $\eta_{jt}$ i.i.d. error term (not observed by the firm).\\
+\\
+When estimating the production function with OLS potential biases can occur:
+\begin{enumerate}
+    \item Simultaneity: K and L are chosen by the firm. So the choices of K and L depend on the efficiency of the management, which is $\omega_{jt}$, making them endogenous. For example if the management is more productive a firm could hire less L for the same Output, and when estimating this by OLS it would underestimate Labor. 
+    \item Selection bias: Firms in the sample are a non-random sample, because firms enter or exit the market based on their productivity $\omega_{jt}$. Less productive firms are more likely to exit the industry, which leads to selection bias.
+\end{enumerate}
+\newpage
+\section*{Exercise 3: Replication Columns 1-5 of Table IV in OP(1996)}
+\begin{table}[!htbp] \centering 
+   \resizebox{\textwidth}{!}{
+\begin{tabular}{@{\extracolsep{5pt}}lccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{5}{c}{\textit{Dependent variable: loutput}} \\ 
+\cline{2-6} 
+\\[-1.8ex] & \textit{OLS} & \textit{FE} & \textit{OLS} & \textit{FE} & \textit{OLS} \\ 
+ & \textit{Balanced Panel} & \textit{Balanced Panel} & \textit{full sample} & \textit{full sample} & \textit{full sample} \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4) & (5)\\ 
+\hline \\[-1.8ex] 
+Constant & 0.838$^{***}$ &  & 0.483$^{***}$ &  & 0.529$^{***}$ \\ 
+  & (0.278) &  & (0.102) &  & (0.109) \\ 
+  & & & & & \\ 
+ lcapital & 0.127$^{***}$ & 2.401$^{***}$ & 0.116$^{***}$ & 0.851$^{***}$ & 0.162$^{***}$ \\ 
+  & (0.037) & (0.694) & (0.023) & (0.204) & (0.045) \\ 
+  & & & & & \\ 
+ llabor & 0.769$^{***}$ & 15.806$^{***}$ & 0.837$^{***}$ & 7.614$^{***}$ & 0.834$^{***}$ \\ 
+  & (0.039) & (1.844) & (0.026) & (0.617) & (0.026) \\ 
+  & & & & & \\ 
+ age & 0.0002 & $-$0.113$^{***}$ & $-$0.002 & $-$0.070$^{***}$ & $-$0.002 \\ 
+  & (0.002) & (0.029) & (0.002) & (0.015) & (0.002) \\ 
+  & & & & & \\ 
+ linvestment &  &  &  &  & $-$0.079 \\ 
+  &  &  &  &  & (0.065) \\ 
+  & & & & & \\ 
+\hline \\[-1.8ex] 
+Observations & 648 & 648 & 1,616 & 1,616 & 1,616 \\ 
+R$^{2}$ & 0.561 & 0.140 & 0.750 & 0.142 & 0.750 \\ 
+Adjusted R$^{2}$ & 0.559 & $-$0.036 & 0.750 & $-$0.281 & 0.750 \\ 
+Residual Std. Error & 0.554 (df = 644) &  & 0.555 (df = 1612) &  & 0.554 (df = 1611) \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{5}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+}
+\end{table}
+\FloatBarrier
+In Columns 1 and 2, we use a balanced panel that includes only firms data available for the entire sample period of 6 years. Columns 3 to 5 use the full sample, which includes firms that exited before the end of the period (for the years they were active) as well as firms that entered later. As a result, the balanced panel contains less than half as many observations as the full sample.\\
+\\
+Possible biases that explain the results could be endogeneity of K and L. Since firms observe their own unobserved productivity $\omega_j$ when making decisions about K or L, these may be positively correlated with unobserved productivity $\omega_j$. This can bias the OLS estimate for labor upwards. The  fixed effects estimator can account for this unobserved productivity, as it absorbs unobserved, but also time-invariant effects. So this only works if $\omega_j$ is constant over time.\\
+\\
+Another source of bias arises, because the balanced panel only keeps firms that survived the whole sample period of 6 years. There firms with more capital are disproportionally more represented. With more capital a firm is more likely to survive even when their productivity is low, because capital can act as a buffer against negative productivity shocks. This selection leads to a negative correlation between capital and productivity $\omega_j$, which in turn biases on the estimated coefficient for capital downwards.\\
+\\
+When using the full sample the coefficient on capital increases in the FE model and the OLS model with investment. The OLS model with investment, includes investment as a proxy to control for the unobserved productivity $\omega_j$. The upward bias of labor does not show here. When using FE accounting for unobserved productivity or use the full sample the coefficients on labor increase\\
+\\
+\textbf{Under what assumptions is each model consistent:}\\
+The OLS model is consistent only under strict exogeneity, which is violated if inputs are chosen based on unobserved productivity $\omega_j$.
+The FE model is consistent if unobserved productivity $\omega_j$ is time-invariant and uncorrelated with time-varying inputs.\\
+\\
+\textbf{Is there evidence that any of the assumptions are violated?}\\
+The differences between the balanced panel and the full sample suggest that the balanced sample is not random. The FE estimates on labor can not be reliably interpreted here due to data limitations. So we can not assess if endogeneity was addressed in this case. However, the difference between OLS and OLS with investment suggests that the labor input is endogenous in the OLS results of the balanced panel, likely because unobserved productivity was not accounted for. This indicates that this assumption is also violated.
+\section*{Exercise 4: OP step 1}
+\section*{Exercise 5: OP step 2}
+
+Assumptions OP estimator:
+\begin{enumerate}
+    \item 1st order Markov:
+    \[P(\omega_{jt} \mid I_{jt-1}) = P(\omega_{jt} \mid \omega_{jt-1})\]
+    Productivity evolves according to 1st order Markov Process. Everything that happened in the past in the firm may determine productivity today.
+    \item timing:
+    \[k_{jt} = K(k_{jt-1}, i_{jt-1}),\]
+    Capital is accumulated over time and is based on past investment$i_{jt-1}$.\\
+    Labor is non-dynamic and therefore only affects current output and not future productivity or capiral.
+    \item strict monotonicity: the more i invest the higher productivity\\ \[i_{jt} = f_t(\omega_{jt}, k_{jt})\]
+    Only if $i_{jt}$ is a monotonic function, it is possible to take the inverse and back out $\omega_{jt}$ which is unobserved. If $i_{jt}$ is not invertible you might get 2 solutions
+\end{enumerate}
+
+
+\end{document}
